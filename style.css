@@ -3,6 +3,10 @@ body {
   padding: 0;
 }
 
+button {
+  cursor: pointer;
+}
+
 .hat {
   height: 100px;
   width: 100%;
@@ -43,4 +47,30 @@ body {
   grid-column-end: 3;
   grid-row-start: 5;
   grid-row-end: 7;
+}
+
+.comment-block {
+  height: auto;
+  outline: none;
+  overflow: none;
+  resize: none;
+}
+
+.success-comment.active {
+  background-color: #abd873;
+  cursor: pointer;
+  opacity: 1;
+}
+
+.success-comment {
+  background-color: #a1a1a1;
+  cursor: not-allowed;
+  border-radius: 5px;
+  transition: 200ms;
+  color: #000000;
+  outline: none;
+  opacity: 0.4;
+  border: none;
+  width: 213px;
+  height: 61px;
 }
