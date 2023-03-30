@@ -1,34 +1,29 @@
-type TemplateComment = {
-  text: string;
-  feature: boolean;
-  rating: number;
-};
+import User from "./user.js"
 
 class CommentBlog {
-  private comment: TemplateComment = {
-    text: "",
-    feature: false,
-    rating: 0,
-  };
+  private user: User;
+  private text: string;
+  // private rating: number = 0;
 
-  constructor(comment: string) {
-    this.comment.text = comment;
+  constructor(user: User, comment: string) {
+    this.user = user;
+    this.text = comment;
   }
 
-  public addRating(): void {
-    this.comment.rating++;
-  }
+  // public addRating(): void {
+  //   this.rating++;
+  // }
 
-  public removeRating(): void {
-    this.comment.rating--;
-  }
+  // public removeRating(): void {
+  //   this.rating--;
+  // }
 
-  public featureChange(): void {
-    this.comment.feature = !this.comment.feature;
+  public getUser(): User {
+    return this.user;
   }
 
   public toString(): string {
-    return `${this.comment.text}`;
+    return `${this.text}`;
   }
 }
 

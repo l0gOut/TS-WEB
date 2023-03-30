@@ -1,23 +1,20 @@
 class CommentBlog {
-    constructor(comment) {
-        this.comment = {
-            text: "",
-            feature: false,
-            rating: 0,
-        };
-        this.comment.text = comment;
+    // private rating: number = 0;
+    constructor(user, comment) {
+        this.user = user;
+        this.text = comment;
     }
-    addRating() {
-        this.comment.rating++;
-    }
-    removeRating() {
-        this.comment.rating--;
-    }
-    featureChange() {
-        this.comment.feature = !this.comment.feature;
+    // public addRating(): void {
+    //   this.rating++;
+    // }
+    // public removeRating(): void {
+    //   this.rating--;
+    // }
+    getUser() {
+        return this.user;
     }
     toString() {
-        return `${this.comment.text}`;
+        return `${this.text}`;
     }
 }
 export default CommentBlog;
