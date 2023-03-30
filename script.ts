@@ -7,41 +7,30 @@ const successComment: HTMLElement | null =
   document.querySelector(".success-comment");
 const commentContainer: HTMLElement | null =
   document.querySelector(".comment-container");
-const signUser: HTMLInputElement | null = document.querySelector(".sign-user");
-const signButton: HTMLElement | null = document.querySelector(".sign-button");
-const userName: HTMLElement | null = document.querySelector(".user-name");
+const nickname: HTMLInputElement | null = document.querySelector(".nickname");
 
 let user: User;
 
-signButton?.addEventListener("click", signOrExit);
-
 successComment?.addEventListener("click", createComment);
 
-// Изменение состояния кнопки при вводе текста
-comment?.addEventListener("input", e => {
-  const commentText: HTMLInputElement = <HTMLInputElement>e.target;
+comment?.addEventListener("input", activateButton);
+nickname?.addEventListener("input", activateButton);
+
+// Изменение состояния кнопки при вводе комментария и никнейма
+function activateButton() {
+  const commentText: HTMLInputElement = <HTMLInputElement>comment;
+  const nicknameText: HTMLInputElement = <HTMLInputElement>nickname;
 
   // Если есть текст в поле, то можно оставить комментарий, иначе кнопка заблокируется
-  if (commentText.value.trim() && successComment) {
+  if (
+    commentText.value.trim() &&
+    nicknameText.value.trim().length >= 4 &&
+    successComment
+  ) {
     successComment.classList.add("active-button");
+    user = new User(nicknameText.value.trim());
   } else if (successComment) {
     successComment.classList.remove("active-button");
-  }
-});
-
-// Заход и выход пользователя через меню сверху
-function signOrExit(): void {
-  if (userName?.classList.contains("active") && signButton && signUser) {
-    userName.classList.remove("active");
-    signUser.classList.remove("hide");
-    signButton.textContent = "Войти";
-  } else if (userName && signButton && signUser?.value.trim() && comment) {
-    userName.textContent = signUser.value.trim();
-    user = new User(signUser.value.trim());
-    userName.classList.add("active");
-    signUser.classList.add("hide");
-    signButton.textContent = "Выйти";
-    signUser.value = "";
   }
 }
 
@@ -54,10 +43,32 @@ function createComment(): void {
     );
     const newComment: HTMLElement = document.createElement("div");
 
-    newComment.innerHTML = `${CommentBlock.getUser().toString()}, оставил комментарий \n ${CommentBlock.toString()}`;
+    newComment.classList.add("comment");
+
+    const currentDate = CommentBlock.getDate();
+
+    newComment.innerHTML = `
+    <div class="avatar">
+      <img src="" alt="Avatar"/>
+    </div>
+    <div class="comment-card">
+      <div class="comment-nickname-date">
+        <p class="comment-nickname">${CommentBlock.getUser().toString()}</p>
+        <p class="comment-date">${currentDate.getDate()}.${currentDate.getMonth()} ${currentDate.getHours()}:${currentDate.getMinutes()}</p>
+      </div>
+      <div class="comment-text">
+      ${CommentBlock.toString()}
+      </div>
+      <div class="comment-reaction">
+        <p>Ответить</p>
+        <p>В избранное</p>
+        <p>Рейтинг</p>
+      </div>
+    </div>
+    `;
 
     commentContainer?.appendChild(newComment);
-    successComment?.classList.remove("active");
+    successComment?.classList.remove("active-button");
     comment.value = ""; // Стирания прошлого текста
   }
 }

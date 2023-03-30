@@ -1,4 +1,5 @@
-body {
+body,
+p {
   margin: 0;
   padding: 0;
 }
@@ -12,28 +13,25 @@ button {
   width: 100%;
 }
 
-.user {
-  justify-content: flex-end;
-  align-items: center;
+.comment-create-container {
   display: flex;
+}
+
+.comment-create {
   width: 100%;
 }
 
-.hide {
-  display: none;
-}
-
-.active {
-  display: block;
-}
-
-.sign-user {
+.create-nickname input {
   outline: none;
-  border-color: silver;
   border-width: 0 0 1px 0;
+  border-color: silver;
+  color: #122ac0;
 }
 
-
+.create-comment {
+  display: flex;
+  justify-content: space-between;
+}
 
 .main {
   height: 100vh;
@@ -73,10 +71,14 @@ button {
 }
 
 .comment-block {
-  height: auto;
+  padding: 20px 20px 20px 30px;
+  width: calc(100% - 300px);
+  font-size: 18px;
   outline: none;
-  overflow: none;
   resize: none;
+  border: none;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
 }
 
 .success-comment.active-button {
@@ -95,5 +97,46 @@ button {
   opacity: 0.4;
   border: none;
   width: 213px;
-  height: 61px;
+  height: 60px;
+}
+
+.comment {
+  display: flex;
+}
+
+.avatar {
+  min-width: 80px;
+  height: 80px;
+}
+
+.comment-card {
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+}
+
+.comment-nickname-date {
+  display: flex;
+  column-gap: 20px;
+  height: 40px;
+  align-items: flex-end;
+}
+
+.comment-nickname-date .comment-nickname {
+  color: #122ac0;
+  font-size: 18px;
+}
+
+.comment-nickname-date .comment-date {
+  color: silver;
+  font-size: 14px;
+}
+
+.comment-text {
+  text-align: justify;
+}
+
+.comment-reaction {
+  display: flex;
+  column-gap: 20px;
 }

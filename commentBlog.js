@@ -1,6 +1,7 @@
 class CommentBlog {
     // private rating: number = 0;
     constructor(user, comment) {
+        this.date = new Date();
         this.user = user;
         this.text = comment;
     }
@@ -12,6 +13,9 @@ class CommentBlog {
     // }
     getUser() {
         return this.user;
+    }
+    getDate() {
+        return this.date;
     }
     toString() {
         return `${this.text}`;

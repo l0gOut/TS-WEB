@@ -3,6 +3,7 @@ import User from "./user.js"
 class CommentBlog {
   private user: User;
   private text: string;
+  private date: Date = new Date();
   // private rating: number = 0;
 
   constructor(user: User, comment: string) {
@@ -20,6 +21,10 @@ class CommentBlog {
 
   public getUser(): User {
     return this.user;
+  }
+
+  public getDate(): Date {
+    return this.date;
   }
 
   public toString(): string {

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -8,13 +8,7 @@
     <title>Document</title>
   </head>
   <body>
-    <header class="hat">
-      <div class="user">
-        <input class="sign-user" type="text" />
-        <h1 class="user-name hide">Сергей Нечаев</h1>
-        <button class="sign-button">Войти</button>
-      </div>
-    </header>
+    <header class="hat banner"></header>
     <div class="main">
       <div class="left-promo banner"></div>
       <div class="container-user-content">
@@ -30,11 +24,23 @@
           <div class="box-9 banner"></div>
         </div>
         <hr />
-        <textarea
-          class="comment-block"
-          placeholder="Введите текст сообщения..."
-        ></textarea>
-        <button class="success-comment">Отправить</button>
+        <div class="comment-create-container">
+          <div class="avatar">
+            <img src="" alt="Avatar" />
+          </div>
+          <div class="comment-create">
+            <div class="create-nickname">
+              <input class="nickname" placeholder="Введите никнейм..." type="text" />
+            </div>
+            <div class="create-comment">
+              <textarea
+                class="comment-block"
+                placeholder="Введите текст сообщения..."
+              ></textarea>
+              <button class="success-comment">Отправить</button>
+            </div>
+          </div>
+        </div>
         <div class="comment-container"></div>
       </div>
     </div>
