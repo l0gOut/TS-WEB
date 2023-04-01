@@ -1,17 +1,23 @@
-// import CommentBlog from "./commentBlog.js";
+import CommentBlog from "./commentBlog.js";
 
 class User {
   private user: string;
-//   private features: CommentBlog[] = [];
+  private avatarUrl: string;
+  private features: CommentBlog[] = [];
 
-  constructor(user: string) {
+  constructor(user: string, avatarUrl: string ) {
     this.user = user;
+    this.avatarUrl = avatarUrl;
   }
 
-//   public addFeature(feature: CommentBlog): CommentBlog[] {
-//     this.features.push(feature);
-//     return this.features;
-//   }
+  public addFeature(feature: CommentBlog): CommentBlog[] {
+    this.features.push(feature);
+    return this.features;
+  }
+
+  public getAvatar(): string {
+    return this.avatarUrl;
+  }
 
   public toString(): string {
     return this.user;
