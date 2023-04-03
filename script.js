@@ -72,12 +72,30 @@ function createComment() {
       <div class="comment-reaction">
         <button class="reaction-reply"><img class="reply-pic" src="./image/reply.png">Ответить</button>
         <button class="reaction-feature">&#10084; В избранное</button>
-        <button class="reaction-rating">0</button>
+        <div class="reaction-rating">
+          <button class="rating-down rating-down-${CommentBlock.getId()}">&#8722;</button>
+          <p class="current-rating current-rating-${CommentBlock.getId()}">0</p>
+          <button class="rating-up rating-up-${CommentBlock.getId()}">+</button>
+        </div>
       </div>
     </div>
     `;
         commentContainer === null || commentContainer === void 0 ? void 0 : commentContainer.appendChild(newComment);
         successComment === null || successComment === void 0 ? void 0 : successComment.classList.remove("active-button");
         comment.value = ""; // Стирания прошлого текста
+        if (symbolsChanged)
+            symbolsChanged.textContent = "Макс. 1000 символов";
+        const currentRating = document.querySelector(`.current-rating-${CommentBlock.getId()}`);
+        const ratingMinus = document.querySelector(`.rating-down-${CommentBlock.getId()}`);
+        const ratingPlus = document.querySelector(`.rating-up-${CommentBlock.getId()}`);
+        ratingMinus === null || ratingMinus === void 0 ? void 0 : ratingMinus.addEventListener("click", () => {
+            if (currentRating)
+                currentRating.textContent = `${currentRating.textContent - 1}`;
+        });
+        ratingPlus === null || ratingPlus === void 0 ? void 0 : ratingPlus.addEventListener("click", () => {
+            if (currentRating) {
+                currentRating.textContent = Number(currentRating.textContent) + 1 + "";
+            }
+        });
     }
 }

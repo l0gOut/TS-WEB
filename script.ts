@@ -98,7 +98,11 @@ function createComment(): void {
       <div class="comment-reaction">
         <button class="reaction-reply"><img class="reply-pic" src="./image/reply.png">Ответить</button>
         <button class="reaction-feature">&#10084; В избранное</button>
-        <button class="reaction-rating">0</button>
+        <div class="reaction-rating">
+          <button class="rating-down rating-down-${CommentBlock.getId()}">&#8722;</button>
+          <p class="current-rating current-rating-${CommentBlock.getId()}">0</p>
+          <button class="rating-up rating-up-${CommentBlock.getId()}">+</button>
+        </div>
       </div>
     </div>
     `;
@@ -106,5 +110,31 @@ function createComment(): void {
     commentContainer?.appendChild(newComment);
     successComment?.classList.remove("active-button");
     comment.value = ""; // Стирания прошлого текста
+
+    if (symbolsChanged) symbolsChanged.textContent = "Макс. 1000 символов";
+
+    const currentRating: HTMLElement | null = document.querySelector(
+      `.current-rating-${CommentBlock.getId()}`
+    );
+    const ratingMinus: HTMLElement | null = document.querySelector(
+      `.rating-down-${CommentBlock.getId()}`
+    );
+    const ratingPlus: HTMLElement | null = document.querySelector(
+      `.rating-up-${CommentBlock.getId()}`
+    );
+
+    ratingMinus?.addEventListener("click", () => {
+      if (currentRating)
+        currentRating.textContent = `${
+          <number>(<unknown>currentRating.textContent) - 1
+        }`;
+    });
+
+    ratingPlus?.addEventListener("click", () => {
+      if (currentRating) {
+        currentRating.textContent = Number(currentRating.textContent) + 1 + ""
+      }
+        
+    });
   }
 }

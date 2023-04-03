@@ -1,16 +1,20 @@
 class CommentBlog {
-    // private rating: number = 0;
     constructor(user, comment) {
+        this.id = new Date().getTime();
         this.date = new Date();
+        this.rating = 0;
         this.user = user;
         this.text = comment;
     }
-    // public addRating(): void {
-    //   this.rating++;
-    // }
-    // public removeRating(): void {
-    //   this.rating--;
-    // }
+    addRating() {
+        this.rating++;
+    }
+    removeRating() {
+        this.rating--;
+    }
+    getId() {
+        return this.id;
+    }
     getUser() {
         return this.user;
     }
