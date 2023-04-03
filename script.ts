@@ -79,7 +79,7 @@ function createComment(): void {
     <div class="avatar">
       <img class="comment-avatar" src="${CommentBlock.getUser().getAvatar()}" alt="Avatar"/>
     </div>
-    <div class="comment-card">
+    <div class="comment-card comment-${CommentBlock.getId()}">
       <div class="comment-nickname-date">
         <p class="comment-nickname">${CommentBlock.getUser().toString()}</p>
         <p class="comment-date">${
@@ -96,7 +96,7 @@ function createComment(): void {
       ${CommentBlock.toString()}
       </div>
       <div class="comment-reaction">
-        <button class="reaction-reply"><img class="reply-pic" src="./image/reply.png">Ответить</button>
+        <button class="reaction-reply reaction-reply-${CommentBlock.getId()}"><img class="reply-pic" src="./image/reply.png">Ответить</button>
         <button class="reaction-feature">&#10084; В избранное</button>
         <div class="reaction-rating">
           <button class="rating-down rating-down-${CommentBlock.getId()}">&#8722;</button>
@@ -113,6 +113,9 @@ function createComment(): void {
 
     if (symbolsChanged) symbolsChanged.textContent = "Макс. 1000 символов";
 
+    const commentReply: HTMLElement | null = document.querySelector(
+      `.reaction-reply-${CommentBlock.getId()}`
+    );
     const currentRating: HTMLElement | null = document.querySelector(
       `.current-rating-${CommentBlock.getId()}`
     );
@@ -123,6 +126,28 @@ function createComment(): void {
       `.rating-up-${CommentBlock.getId()}`
     );
 
+    commentReply?.addEventListener("click", () => {
+      const currentComment: HTMLElement = <HTMLElement>(
+        document.querySelector(`.comment-${CommentBlock.getId()}`)
+      );
+
+      const newComment: HTMLElement = document.createElement("div");
+
+      newComment.classList.add("reply-comment");
+      newComment.classList.add(`reply-comment-${CommentBlock.getId()}`);
+
+      newComment.innerHTML = `
+      <div class="avatar">
+        <img class="comment-avatar" src="${CommentBlock.getUser().getAvatar()}" alt="Avatar"/>
+      </div>
+      <div>
+        Test Text!
+      </div>
+      `;
+
+      currentComment.appendChild(newComment);
+    });
+
     ratingMinus?.addEventListener("click", () => {
       if (currentRating)
         currentRating.textContent = `${
@@ -132,9 +157,8 @@ function createComment(): void {
 
     ratingPlus?.addEventListener("click", () => {
       if (currentRating) {
-        currentRating.textContent = Number(currentRating.textContent) + 1 + ""
+        currentRating.textContent = Number(currentRating.textContent) + 1 + "";
       }
-        
     });
   }
 }

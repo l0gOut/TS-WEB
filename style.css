@@ -52,14 +52,12 @@ button {
 }
 
 .main {
-  height: 100vh;
   margin-top: 40px;
   display: flex;
 }
 
 .left-promo {
   width: 100px;
-  height: 100vh;
   margin-right: 86px;
 }
 

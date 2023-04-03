@@ -57,7 +57,7 @@ function createComment() {
     <div class="avatar">
       <img class="comment-avatar" src="${CommentBlock.getUser().getAvatar()}" alt="Avatar"/>
     </div>
-    <div class="comment-card">
+    <div class="comment-card comment-${CommentBlock.getId()}">
       <div class="comment-nickname-date">
         <p class="comment-nickname">${CommentBlock.getUser().toString()}</p>
         <p class="comment-date">${currentDate.getDate() < 10
@@ -70,7 +70,7 @@ function createComment() {
       ${CommentBlock.toString()}
       </div>
       <div class="comment-reaction">
-        <button class="reaction-reply"><img class="reply-pic" src="./image/reply.png">Ответить</button>
+        <button class="reaction-reply reaction-reply-${CommentBlock.getId()}"><img class="reply-pic" src="./image/reply.png">Ответить</button>
         <button class="reaction-feature">&#10084; В избранное</button>
         <div class="reaction-rating">
           <button class="rating-down rating-down-${CommentBlock.getId()}">&#8722;</button>
@@ -85,9 +85,25 @@ function createComment() {
         comment.value = ""; // Стирания прошлого текста
         if (symbolsChanged)
             symbolsChanged.textContent = "Макс. 1000 символов";
+        const commentReply = document.querySelector(`.reaction-reply-${CommentBlock.getId()}`);
         const currentRating = document.querySelector(`.current-rating-${CommentBlock.getId()}`);
         const ratingMinus = document.querySelector(`.rating-down-${CommentBlock.getId()}`);
         const ratingPlus = document.querySelector(`.rating-up-${CommentBlock.getId()}`);
+        commentReply === null || commentReply === void 0 ? void 0 : commentReply.addEventListener("click", () => {
+            const currentComment = (document.querySelector(`.comment-${CommentBlock.getId()}`));
+            const newComment = document.createElement("div");
+            newComment.classList.add("reply-comment");
+            newComment.classList.add(`reply-comment-${CommentBlock.getId()}`);
+            newComment.innerHTML = `
+      <div class="avatar">
+        <img class="comment-avatar" src="${CommentBlock.getUser().getAvatar()}" alt="Avatar"/>
+      </div>
+      <div>
+        Test Text!
+      </div>
+      `;
+            currentComment.appendChild(newComment);
+        });
         ratingMinus === null || ratingMinus === void 0 ? void 0 : ratingMinus.addEventListener("click", () => {
             if (currentRating)
                 currentRating.textContent = `${currentRating.textContent - 1}`;
